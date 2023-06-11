@@ -2,13 +2,16 @@ package com.example.lab5;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 
+import com.example.lab5.Adapter.ListAdapter;
 import com.example.lab5.Retrofit.Repository;
 import com.example.lab5.databinding.ActivityListCreateBinding;
 import com.example.lab5.entity.Doctor;
@@ -26,6 +29,7 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,10 +59,21 @@ public class ListCreateActivity extends AppCompatActivity {
                 Log.w("msg-test", "Listen failed.", error);
                 return;
             }
+            List<Doctor> doctorList = new ArrayList<>();
             for(QueryDocumentSnapshot doc: snapshot){
                 Doctor doctor = doc.toObject(Doctor.class);
-                Log.d("msg-test", "Nombre: "+doctor.getFirstName());
+                doctorList.add(doctor);
+                //Log.d("msg-test", "Nombre: "+doctor.getFirstName());
             }
+            //System.out.println(doctorList.size());
+            //System.out.println(doctorList.get(0).getEmail());
+            ListAdapter adapter = new ListAdapter();
+            adapter.setContext(ListCreateActivity.this);
+            adapter.setDoctorList(doctorList);
+
+            binding.recycler.setAdapter(adapter);
+            binding.recycler.setLayoutManager(new LinearLayoutManager(ListCreateActivity.this));
+
         });
 
 
