@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/e_correo"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -59,11 +59,11 @@
         android:text="Contraseña"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        app:layout_constraintStart_toStartOf="@+id/e_correo"
+        app:layout_constraintTop_toBottomOf="@+id/e_correo" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/e_contra"
         android:layout_width="312dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -81,17 +81,18 @@
         android:text="Recuperar Contraseña"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/e_contra"
+        app:layout_constraintTop_toBottomOf="@+id/e_contra" />
 
     <Button
         android:id="@+id/ingresar"
-        style="@style/Widget.Material3.Button"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="312dp"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#FF198DB5"
         android:text="Ingresar"
+        android:textAllCaps="false"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -101,7 +102,7 @@
     <com.google.android.gms.common.SignInButton
         android:id="@+id/s_google"
         android:layout_width="312dp"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:layout_marginTop="8dp"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +114,7 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="312dp"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
 
