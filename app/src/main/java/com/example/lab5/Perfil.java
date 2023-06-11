@@ -13,6 +13,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.lab5.databinding.ActivityListCreateBinding;
 import com.example.lab5.databinding.ActivityPerfilBinding;
 import com.example.lab5.entity.Doctor;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -80,6 +83,19 @@ public class Perfil extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Perfil.this, ListCreateActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        binding.button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //FirebaseFirestore db = FirebaseFirestore.getInstance();
+                //CollectionReference collectionRef = db.collection("Doctor");
+                //DocumentReference documentRef = collectionRef.document("your_document_id");
+                Intent intent = new Intent(Perfil.this, Felicitaciones.class);
+                intent.putExtra("name", doctor.getLastName());
                 startActivity(intent);
                 finish();
             }

@@ -1,6 +1,7 @@
 package com.example.lab5.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Doctor implements Serializable {
     private String firstName;
@@ -12,6 +13,15 @@ public class Doctor implements Serializable {
     private String phone;
     private String nationality;
     private String picture;
+    private List<String> pacientes;
+
+    public List<String> getPacientes() {
+        return pacientes;
+    }
+
+    public void setPacientes(List<String> pacientes) {
+        this.pacientes = pacientes;
+    }
 
     public String getPicture() {
         return picture;
