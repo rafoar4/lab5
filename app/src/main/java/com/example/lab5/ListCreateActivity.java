@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -48,6 +51,9 @@ import retrofit2.http.GET;
 
 public class ListCreateActivity extends AppCompatActivity {
     ActivityListCreateBinding binding;
+    List<Doctor> doctorList;
+    ListAdapter adapter;
+    List<Doctor> filteredList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +65,7 @@ public class ListCreateActivity extends AppCompatActivity {
                 Log.w("msg-test", "Listen failed.", error);
                 return;
             }
-            List<Doctor> doctorList = new ArrayList<>();
+            doctorList = new ArrayList<>();
             for(QueryDocumentSnapshot doc: snapshot){
                 Doctor doctor = doc.toObject(Doctor.class);
                 doctorList.add(doctor);
@@ -67,12 +73,32 @@ public class ListCreateActivity extends AppCompatActivity {
             }
             //System.out.println(doctorList.size());
             //System.out.println(doctorList.get(0).getEmail());
-            ListAdapter adapter = new ListAdapter();
+            adapter = new ListAdapter();
             adapter.setContext(ListCreateActivity.this);
-            adapter.setDoctorList(doctorList);
+            filteredList = new ArrayList<>(doctorList);
+            adapter.setDoctorList(filteredList);
 
             binding.recycler.setAdapter(adapter);
             binding.recycler.setLayoutManager(new LinearLayoutManager(ListCreateActivity.this));
+
+            EditText searchEditText = findViewById(R.id.editTextTextPersonName);
+
+            searchEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                    filterData(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
 
         });
 
@@ -168,5 +194,18 @@ public class ListCreateActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void filterData(String query) {
+        filteredList.clear();
+
+        // Perform the filtering
+        for (Doctor item : doctorList) {
+            if (item.getLastName().toLowerCase().contains(query.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 }
