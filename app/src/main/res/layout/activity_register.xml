@@ -90,7 +90,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Ingrese su correo"
-        android:inputType="textPassword"
+        android:inputType="textWebEmailAddress"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
