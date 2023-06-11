@@ -5,9 +5,7 @@ public class Doctor {
     private String lastName;
     private String gender;
     private String email;
-    private String city;
-    private String state;
-    private String country;
+    private String ubicacion;
     private Integer age;
     private String phone;
     private String nationality;
@@ -53,28 +51,12 @@ public class Doctor {
         this.email = email;
     }
 
-    public String getCity() {
-        return city;
+    public String getUbicacion() {
+        return ubicacion;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     public Integer getAge() {

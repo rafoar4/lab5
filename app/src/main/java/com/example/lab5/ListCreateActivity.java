@@ -13,10 +13,14 @@ import com.example.lab5.Retrofit.Repository;
 import com.example.lab5.databinding.ActivityListCreateBinding;
 import com.example.lab5.entity.Doctor;
 import com.example.lab5.entity.RandomUserResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.InputStream;
 import java.security.KeyStore;
@@ -46,7 +50,19 @@ public class ListCreateActivity extends AppCompatActivity {
         binding = ActivityListCreateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.button3.setOnClickListener(new View.OnClickListener() {
+        FirebaseFirestore.getInstance().collection("Doctor").addSnapshotListener((snapshot, error) -> {
+            if(error != null){
+                Log.w("msg-test", "Listen failed.", error);
+                return;
+            }
+            for(QueryDocumentSnapshot doc: snapshot){
+                Doctor doctor = doc.toObject(Doctor.class);
+                Log.d("msg-test", "Nombre: "+doctor.getFirstName());
+            }
+        });
+
+
+        binding.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -93,31 +109,29 @@ public class ListCreateActivity extends AppCompatActivity {
                                     doctor1.setGender("Mujer");
                                 }
                                 doctor1.setEmail(doctor.get(0).getEmail());
-                                doctor1.setCity(doctor.get(0).getLocation().getCity());
-                                doctor1.setState(doctor.get(0).getLocation().getState());
-                                doctor1.setCountry(doctor.get(0).getLocation().getCountry());
+                                doctor1.setUbicacion(doctor.get(0).getLocation().getCity()+" - "+doctor.get(0).getLocation().getState()+" - "+doctor.get(0).getLocation().getCountry());
                                 doctor1.setAge(doctor.get(0).getDob().getAge());
                                 doctor1.setPhone(doctor.get(0).getPhone());
                                 doctor1.setNationality(doctor.get(0).getNat());
                                 doctor1.setPicture(doctor.get(0).getPicture().getLarge());
 
                                 HashMap<String,Object> hashMap = new HashMap<>();
-                                hashMap.put("FirstName",doctor1.getFirstName());
-                                hashMap.put("LasttName",doctor1.getLastName());
-                                hashMap.put("Gender",doctor1.getGender());
-                                hashMap.put("Email",doctor1.getEmail());
-                                hashMap.put("Ubicación",doctor1.getCity()+" - "+doctor1.getState()+" - "+doctor1.getCountry());
-                                hashMap.put("Age",doctor1.getAge());
-                                hashMap.put("Phone",doctor1.getPhone());
-                                hashMap.put("Nationality",doctor1.getNationality());
-                                hashMap.put("Picture",doctor1.getPicture());
+                                hashMap.put("firstName",doctor1.getFirstName());
+                                hashMap.put("lastName",doctor1.getLastName());
+                                hashMap.put("gender",doctor1.getGender());
+                                hashMap.put("email",doctor1.getEmail());
+                                hashMap.put("ubicacion",doctor1.getUbicacion());
+                                hashMap.put("age",doctor1.getAge());
+                                hashMap.put("phone",doctor1.getPhone());
+                                hashMap.put("nationality",doctor1.getNationality());
+                                hashMap.put("picture",doctor1.getPicture());
 
                                 FirebaseFirestore.getInstance().collection("Doctor")
                                         .add(hashMap)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                             @Override
                                             public void onSuccess(DocumentReference documentReference) {
-                                                Toast.makeText(ListCreateActivity.this,"Data save", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(ListCreateActivity.this,"Doctor creado", Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
