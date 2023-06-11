@@ -18,6 +18,9 @@
             android:name=".Perfil"
             android:exported="false" />
         <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
             android:name=".ListCreateActivity"
             android:exported="false" />
         <activity

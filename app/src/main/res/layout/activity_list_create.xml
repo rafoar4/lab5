@@ -54,7 +54,7 @@
                     app:srcCompat="@drawable/aitel" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/nombre_perfil"
                     android:layout_width="99dp"
                     android:layout_height="39dp"
                     android:text="Rodrigo"

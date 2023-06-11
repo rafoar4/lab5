@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
 
                         if (task.isSuccessful()){
                             Toast.makeText(Login.this,"Inicio de sesion correcta", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Login.this, Profile.class));
+                            startActivity(new Intent(Login.this, ListCreateActivity.class));
 
 
 
@@ -142,7 +142,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Toast.makeText(Login.this, "Inicio de sesion correcto", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Login.this, Profile.class));
+                        startActivity(new Intent(Login.this, ListCreateActivity.class));
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
