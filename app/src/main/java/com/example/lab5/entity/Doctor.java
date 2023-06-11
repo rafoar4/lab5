@@ -1,6 +1,8 @@
 package com.example.lab5.entity;
 
-public class Doctor {
+import java.io.Serializable;
+
+public class Doctor implements Serializable {
     private String firstName;
     private String lastName;
     private String gender;

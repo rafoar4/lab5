@@ -1,9 +1,11 @@
 package com.example.lab5.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.lab5.ListCreateActivity;
+import com.example.lab5.Perfil;
 import com.example.lab5.R;
 import com.example.lab5.entity.Doctor;
 import com.squareup.picasso.Picasso;
@@ -43,7 +46,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.DoctorViewHold
         holder.doctor = d;
 
         TextView nombre = holder.itemView.findViewById(R.id.nombre);
-        nombre.setText(d.getLastName());
+        nombre.setText("Dr. "+d.getLastName());
 
         TextView ubicacion = holder.itemView.findViewById(R.id.descripcion);
         ubicacion.setText(d.getUbicacion());
@@ -84,10 +87,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.DoctorViewHold
         String imageUrl = d.getPicture();
         RequestOptions requestOptions = new RequestOptions()
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
-        Glide.with(context)
-                .load(imageUrl)
-                .apply(requestOptions)
-                .into(imageView);
+        Glide.with(context).load(imageUrl).apply(requestOptions).into(imageView);
+
+        Button perfil = holder.itemView.findViewById(R.id.button3);
+        perfil.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Perfil.class);
+                intent.putExtra("doctor",d);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

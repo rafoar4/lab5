@@ -150,7 +150,7 @@ public class ListCreateActivity extends AppCompatActivity {
                                     doctor1.setGender("Mujer");
                                 }
                                 doctor1.setEmail(doctor.get(0).getEmail());
-                                doctor1.setUbicacion(doctor.get(0).getLocation().getCity()+" - "+doctor.get(0).getLocation().getState()+" - "+doctor.get(0).getLocation().getCountry());
+                                doctor1.setUbicacion(doctor.get(0).getLocation().getCountry()+" - "+doctor.get(0).getLocation().getState()+" - "+doctor.get(0).getLocation().getCity());
                                 doctor1.setAge(doctor.get(0).getDob().getAge());
                                 doctor1.setPhone(doctor.get(0).getPhone());
                                 doctor1.setNationality(doctor.get(0).getNat());
