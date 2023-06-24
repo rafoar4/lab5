@@ -11,8 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Bienvenido"
+        android:text="AGENDAMAS"
         android:textColor="#198DB5"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="TeleDoctor es una app diseñada por estudiantes \n de Ingeniería de Telecomunicaciones "
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +39,7 @@
         android:text="Correo"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -48,6 +51,7 @@
         android:ems="10"
         android:hint="Ingrese su correo"
         android:inputType="textEmailAddress"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -59,6 +63,7 @@
         android:text="Contraseña"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/e_correo"
         app:layout_constraintTop_toBottomOf="@+id/e_correo" />
 
@@ -70,6 +75,7 @@
         android:ems="10"
         android:hint="Ingrese su contraseña"
         android:inputType="textPassword"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -81,6 +87,7 @@
         android:text="Recuperar Contraseña"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/e_contra"
         app:layout_constraintTop_toBottomOf="@+id/e_contra" />
 
@@ -94,22 +101,23 @@
         android:text="Ingresar"
         android:textAllCaps="false"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/s_google"
         android:layout_width="312dp"
         android:layout_height="58dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="64dp"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingresar" />
-
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/l_g"
@@ -118,6 +126,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
 
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +139,7 @@
         android:layout_marginTop="8dp"
         android:text="Eres nuevo? Registrate"
         android:textColor="#198DB5"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
