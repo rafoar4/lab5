@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lab5.model.Usuario;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -21,11 +22,14 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
     Button ingresar;
@@ -38,7 +42,13 @@ public class Login extends AppCompatActivity {
 
     GoogleSignInClient googleSignInClient;
 
+    Usuario usuario,usuario1;
+
+    FirebaseFirestore db;
+
     int RC_SIGN_IN=40;
+
+    String userID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +65,7 @@ public class Login extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
 
         auth=FirebaseAuth.getInstance();
+        db=FirebaseFirestore.getInstance();
 
         e_correo=findViewById(R.id.e_correo);
         e_contra=findViewById(R.id.e_contra);
@@ -63,10 +74,7 @@ public class Login extends AppCompatActivity {
         registrar=findViewById(R.id.registrar);
         s_google=findViewById(R.id.s_google);
 
-        registrar.setOnClickListener(v -> {
-            startActivity(new Intent(Login.this,Register.class));
 
-        });
 
         ingresar.setOnClickListener(v -> {
             String l_correo=e_correo.getText().toString();
@@ -141,8 +149,33 @@ public class Login extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(Login.this, "Inicio de sesion correcto", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Login.this, Lista.class));
+
+                        if(task.isSuccessful()){
+                            FirebaseUser user=auth.getCurrentUser();
+                            usuario1= new Usuario();
+                            usuario1.setCorreo(user.getEmail());
+                            usuario1.setNombre(user.getDisplayName());
+                            usuario1.setNumero(user.getPhoneNumber());
+                            userID=user.getUid();
+                            db.collection("usuarios")
+                                    .document(userID)
+                                    .set(usuario1)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(Login.this,"Inicio de sesion correcta",Toast.LENGTH_SHORT).show();
+
+                                            startActivity(new Intent(Login.this,ListCreateActivity.class));
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
